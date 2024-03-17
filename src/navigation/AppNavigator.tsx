@@ -9,15 +9,26 @@ import {
 
 const Stack = createStackNavigator();
 const AppNavigator = () => {
-  const screenOption: object = {
-    headerShown: false,
-    animation: 'slide_from_right',
-    animationDuration: 500,
-  };
-
   return (
     <Stack.Navigator
-      screenOptions={screenOption}
+      screenOptions={{
+        headerShown: false,
+        // Slide animation from right
+        cardStyleInterpolator: ({current, layouts}) => {
+          return {
+            cardStyle: {
+              transform: [
+                {
+                  translateX: current.progress.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [layouts.screen.width, 0],
+                  }),
+                },
+              ],
+            },
+          };
+        },
+      }}
       initialRouteName={pageNameHome}>
       <Stack.Screen name={pageNameHome} component={pageHome} />
       <Stack.Screen

@@ -6,6 +6,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
+import {useNavigation} from '@react-navigation/native';
 
 import {getFlightsList} from '../../services/HomeService';
 import {colors, globalStyles} from '../../themes';
@@ -14,8 +15,11 @@ import Card from '../../components/Card';
 import SortAndFilterSection from '../../components/SortAndFilterSection';
 import {moderateScale} from '../../common/constants';
 import FilterModal from '../../components/FilterModal';
+import {pageNameFlightDetails} from '../../navigation/Routes';
 
 const Home = () => {
+  const navigation = useNavigation();
+
   const [loading, setLoading] = useState(false);
   const [isSortApplied, setIsSortApplied] = useState(false);
   const [isFilterApplied, setIsFilterApplied] = useState(false);
@@ -96,6 +100,12 @@ const Home = () => {
     }
   };
 
+  const onCheckPress = (data: any) => {
+    navigation.navigate(pageNameFlightDetails, {
+      data,
+    });
+  };
+
   return (
     <>
       {loading ? (
@@ -135,7 +145,9 @@ const Home = () => {
           }
           data={flightsData}
           keyExtractor={item => item.id.toString()}
-          renderItem={({item, index}) => <Card data={item} />}
+          renderItem={({item}) => (
+            <Card data={item} onCheckPress={onCheckPress} />
+          )}
         />
       )}
       {flightsData.length > 0 && (
@@ -153,7 +165,6 @@ const Home = () => {
 
       <FilterModal
         visible={showFilterModal}
-        // visible={true}
         onClose={() => setShowFilterModal(false)}
         filterData={filterData}
         setFilterData={setFilterData}

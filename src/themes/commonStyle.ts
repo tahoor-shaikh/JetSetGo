@@ -1,18 +1,17 @@
-import { StyleSheet } from 'react-native';
-import { colors } from './colors';
+import {StyleSheet} from 'react-native';
+import {colors} from './colors';
 import flex from './flex';
 
 // App Common Styles
 export default StyleSheet.create({
   mainContainer: {
-    backgroundColor: colors.offWhiteV2,
+    backgroundColor: colors.white,
     ...flex.flex,
   },
   relative: {
-    position: 'relative'
+    position: 'relative',
   },
   absolute: {
-    position: 'absolute'
+    position: 'absolute',
   },
-
 });

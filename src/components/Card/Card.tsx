@@ -11,10 +11,11 @@ import moment from 'moment';
 
 interface CardProps {
   data: any;
+  onCheckPress: (data: any) => void;
 }
 
 const Card = (props: CardProps) => {
-  const {data} = props;
+  const {data, onCheckPress} = props;
 
   const formattedTime = useMemo(() => {
     // Arrival and departure times
@@ -38,6 +39,16 @@ const Card = (props: CardProps) => {
     return formattedResult;
   }, [data]);
 
+  const formattedArrivalTime = useMemo(
+    () => moment(data?.arrivalTime).format('HH.mm'),
+    [data],
+  );
+
+  const formattedDepartureTime = useMemo(
+    () => moment(data?.departureTime).format('HH.mm'),
+    [data],
+  );
+
   return (
     <View style={localStyles.card}>
       <View
@@ -57,7 +68,6 @@ const Card = (props: CardProps) => {
               }}>
               {data.airline}
             </Text>
-            {/* <images.IndigoLogo /> */}
           </View>
 
           <Text>
@@ -89,7 +99,7 @@ const Card = (props: CardProps) => {
               ...typography.fontSizes.f16,
               ...typography.fontWeights.semiBold,
             }}>
-            5.50
+            {formattedDepartureTime}
           </Text>
           <Text
             style={{
@@ -121,7 +131,7 @@ const Card = (props: CardProps) => {
               ...typography.fontWeights.semiBold,
               textAlign: 'right',
             }}>
-            7.30
+            {formattedArrivalTime}
           </Text>
           <Text
             style={{
@@ -179,7 +189,17 @@ const Card = (props: CardProps) => {
           </Text>
         </View>
       </View>
-      <Button title="Check" />
+      <Button
+        title="Check"
+        onPress={() =>
+          onCheckPress({
+            ...data,
+            formattedArrivalTime,
+            formattedDepartureTime,
+            formattedTime,
+          })
+        }
+      />
     </View>
   );
 };

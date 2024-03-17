@@ -117,7 +117,7 @@ const FilterModal = (props: any) => {
               isBordered
             />
             <Button
-              title={'Apply'}
+              title="Apply"
               onPress={() => {
                 onApplyPress();
               }}
