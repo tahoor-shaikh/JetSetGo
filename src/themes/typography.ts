@@ -1,5 +1,24 @@
 import {moderateScale} from '../common/constants';
 
+// App font weights:
+const fontWeights = {
+  light: {
+    fontWeight: '300',
+  },
+  normal: {
+    fontWeight: '400',
+  },
+  semiBold: {
+    fontWeight: '600',
+  },
+  medium: {
+    fontWeight: '500',
+  },
+  bold: {
+    fontWeight: '700',
+  },
+};
+
 // App font sizes:
 const fontSizes = {
   f8: {
@@ -55,6 +74,6 @@ const fontSizes = {
   },
 };
 
-const typography = {fontSizes};
+const typography = {fontSizes, fontWeights};
 
 export default typography;
