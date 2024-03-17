@@ -11,6 +11,7 @@
     "pod": "cd ios && pod install --repo-update && cd ..",
     "clean:android": "cd android && ./gradlew clean && cd ..",
     "install:files": "yarn install && yarn run pod",
+    "generate:bundle": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res",
     "android:build": "npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle && cd android && ./gradlew clean && ./gradlew assembleRelease --warning-mode all",
     "clean:files": "rm -rf node_modules && rm -rf yarn.lock && rm -rf ios/Pods && rm -rf ios/.xcode.env.local && rm -rf ios/Podfile.lock "
   },
